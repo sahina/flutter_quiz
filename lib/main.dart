@@ -12,7 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var _questions = [
+  static const _questions = const [
     {
       "text": "What is your favorite color?",
       "answers": [
@@ -49,15 +49,15 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("Quiz App"),
         ),
-        body: Column(
+        body: _questionIndex < _questions.length ? Column(
           children: <Widget>[
             Question(_questions[_questionIndex]["text"]),
             ...(_questions[_questionIndex]["answers"] as List<String>)
                 .map((answer) {
-                  return Answer(_answerQuestion, answer);
-                }).toList(),
+              return Answer(_answerQuestion, answer);
+            }).toList(),
           ],
-        ),
+        ) : Center(child: Text("You did it!")),
       ),
     );
   }
