@@ -16,25 +16,28 @@ class _MyAppState extends State<MyApp> {
     {
       "text": "What is your favorite color?",
       "answers": [
-        "blue",
-        "green",
-        "red",
-        "blue",
+        {"text": "blue", "score": 6},
+        {"text": "green", "score": 3},
+        {"text": "red", "score": 3},
+        {"text": "white", "score": 1},
       ]
     },
     {
       "text": "What is your fav food?",
       "answers": [
-        "tacos",
-        "pasta",
-        "bbq",
-        "sandwich",
+        {"text": "tacos", "score": 6},
+        {"text": "pasta", "score": 6},
+        {"text": "bbq", "score": 6},
+        {"text": "sandwich", "score": 6},
       ]
     },
   ];
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
+    _totalScore += score;
+
     setState(() {
       _questionIndex += 1;
     });
@@ -54,7 +57,7 @@ class _MyAppState extends State<MyApp> {
                 questions: _questions,
                 answerQuestion: _answerQuestion,
                 questionIndex: _questionIndex)
-            : Result(),
+            : Result(_totalScore),
       ),
     );
   }
